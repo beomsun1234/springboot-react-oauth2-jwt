@@ -1,6 +1,9 @@
 package com.bs.hellooauth2jwt.oauth;
 
 
+import com.bs.hellooauth2jwt.domain.Member;
+import com.bs.hellooauth2jwt.domain.MemberRepostitory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -15,8 +18,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
+@RequiredArgsConstructor
 @Service
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+    private final MemberRepostitory memberRepostitory;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -34,11 +39,18 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
          * 네이버는 id라는 필드가 유니크 필드입니다.
          */
         OAuth2Attributes oAuth2Attributes = OAuth2Attributes.of(registrationId,userNameAttributeName,oAuth2User.getAttributes());
+        Member member = saveOrUpdate(oAuth2Attributes);
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")),
                 oAuth2Attributes.getAttributes(),
                 oAuth2Attributes.getNameAttributeKey()
         );
+    }
+    private Member saveOrUpdate(OAuth2Attributes attributes){
+        Member user = memberRepostitory.findByEmail(attributes.getEmail())
+                .map(entity -> entity.update(attributes.getName()))
+                .orElse(attributes.toEntity());
+        return memberRepostitory.save(user);
     }
 }
