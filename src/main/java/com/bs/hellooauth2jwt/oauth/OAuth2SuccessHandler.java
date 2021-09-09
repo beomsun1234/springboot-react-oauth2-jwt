@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.FilterChain;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -43,8 +44,9 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler{
         log.info("{}", token.getAccessToken());
         response.addHeader("Authorization", "Bearer " +  token.getAccessToken());
         String targetUrl = "/auth/success?token="+token.getAccessToken();
-        RequestDispatcher dis = request.getRequestDispatcher(targetUrl);
-        dis.forward(request, response);
+        response.sendRedirect("http://localhost:3000/auth/success?token="+token.getAccessToken());
+//        RequestDispatcher dis = request.getRequestDispatcher(targetUrl);
+//        dis.forward(request, response);
     }
 
 }
