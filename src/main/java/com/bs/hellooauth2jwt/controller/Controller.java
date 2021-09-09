@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 public class Controller {
 
     @GetMapping("/")
-    public OAuth2User home(@AuthenticationPrincipal OAuth2User oAuth2User){
-        return oAuth2User;
+    public String home(@AuthenticationPrincipal OAuth2User oAuth2User){
+        return oAuth2User.getName();
     }
 }
