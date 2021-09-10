@@ -18,4 +18,10 @@ public class Controller {
     public String home(@AuthenticationPrincipal OAuth2User oAuth2User){
         return oAuth2User.getName();
     }
+
+    @GetMapping("/api/v1/member")
+    public String member(){
+        log.info("인증된 사용자가 api/member요청");
+        return "환영합니다";
+    }
 }

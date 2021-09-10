@@ -44,7 +44,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler{
         log.info("{}", token.getAccessToken());
         response.addHeader("Authorization", "Bearer " +  token.getAccessToken());
         String targetUrl = "/auth/success?token="+token.getAccessToken();
-        response.sendRedirect("http://localhost:3000/auth/success?token="+token.getAccessToken());
+        response.sendRedirect("http://localhost:3000/auth?token="+token.getAccessToken());
 //        RequestDispatcher dis = request.getRequestDispatcher(targetUrl);
 //        dis.forward(request, response);
     }

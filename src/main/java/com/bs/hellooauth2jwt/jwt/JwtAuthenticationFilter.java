@@ -42,6 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = request.getHeader("Auth");
         if (token != null) {
             log.info("token={}", token);
+            log.info("-------------토큰 확인중--------------------------");
         }
         if (token != null && jwtUtil.verifyToken(token)) {
             String email = jwtUtil.getEmail(token);
@@ -52,6 +53,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             UsernamePasswordAuthenticationToken newAuth = new UsernamePasswordAuthenticationToken(
                     customUserDetail, null, customUserDetail.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(newAuth);
+            log.info("-------------인가------------------------------------");
             return newAuth;
         }
         return null;
