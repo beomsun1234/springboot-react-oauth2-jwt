@@ -42,11 +42,40 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler{
         Token token = jwtUtil.generateToken(email, name);
         //memberRepostitory.save(oAuth2User.toEntity());
         log.info("{}", token.getAccessToken());
+        String ip = getRemoteIp(request);
+        log.info("사용자port={}",request.getServerPort());
+        log.info("ip={}",ip);
         response.addHeader("Authorization", "Bearer " +  token.getAccessToken());
         String targetUrl = "/auth/success?token="+token.getAccessToken();
-        response.sendRedirect("http://localhost:3000/auth?token="+token.getAccessToken());
+        response.sendRedirect(ip+":3000/auth?token="+token.getAccessToken());
 //        RequestDispatcher dis = request.getRequestDispatcher(targetUrl);
 //        dis.forward(request, response);
+    }
+
+    /**
+     * ip수집
+     * @param request
+     * @return
+     */
+    public static String getRemoteIp(HttpServletRequest request) {
+        String ip = request.getHeader("X-Forwarded-For");
+        if (ip == null) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null) {
+            ip = request.getHeader("HTTP_CLIENT_IP");
+        }
+        if (ip == null) {
+            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+        }
+        if (ip == null) {
+            ip = request.getRemoteAddr();
+        }
+
+        return "http://"+ip;
     }
 
 }
