@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {  useState } from 'react';
 import axios from 'axios';
+import MemberInfo from './components/MemberInfo';
 
 
 const Home = () => {
+
+    const [member, setMember ] = useState([]);
 
     const token = window.sessionStorage.getItem("token")
 
@@ -16,11 +19,9 @@ const Home = () => {
                 "Auth" : token
             }
         }).then((response)=>{
-            console.log(response);
-            const data = JSON.stringify(response)
-            let test = data.map(as=>(as.data))
-            console.log(test)
-            alert(test)
+            console.log("1"+response);
+            const data = JSON.data(response)
+            console.log("2"+data)
         }).catch(Error=>{
             console.log(Error);
         })
@@ -36,15 +37,12 @@ const Home = () => {
                 "Auth" : token
             }
         }).then((response)=>{
-            console.log(response);
-            let data = JSON.stringify(response)
-            console.log(response.data("data"))
-            console.log(data)
-            
+            response= response.data
+            console.log(response)
+            setMember(response)
         }).catch(Error=>{
             console.log(Error);
         })
-    
     }
     
     return (
@@ -52,11 +50,12 @@ const Home = () => {
             <h2>
             Home
             </h2>
-            {token == null ? <a  href="http://localhost:8080/oauth2/authorization/google">구글로그인</a> : "login sucess"}
-            {token == null ? null : <button onClick={() => { f1();}}>Click Me1</button>}
-            {token == null ? null : <button onClick={() => { f2();}}>Click Me2</button>}
-        </div>
-        
+            <div>     
+                {token == null ? <a  href="http://localhost:8080/oauth2/authorization/google">구글로그인</a> : "loginsucess"} {token == null ? null : <button onClick={() => { f1();}}>연결 테스트</button>}
+            </div>
+                {token == null ? null : <button onClick={() => { f2();}}>내정보 보기</button>}
+                <MemberInfo MemberInfo = {member}></MemberInfo>
+            </div>
     );
 };
 
