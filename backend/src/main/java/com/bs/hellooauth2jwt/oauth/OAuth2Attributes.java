@@ -58,6 +58,7 @@ public class OAuth2Attributes {
                 .name(name)
                 .email(email)
                 .role(Role.ROLE_USER)
+                .picture(picture)
                 .authenticationProvider(authenticationProvider)
                 .build();
     }
