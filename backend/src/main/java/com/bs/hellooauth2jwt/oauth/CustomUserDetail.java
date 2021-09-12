@@ -1,7 +1,10 @@
 package com.bs.hellooauth2jwt.oauth;
 
 import com.bs.hellooauth2jwt.domain.Member;
+import com.bs.hellooauth2jwt.dto.UserInfoDto;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +15,9 @@ import java.util.Collection;
 import java.util.Map;
 
 
-@Data
+
+@Getter
+@NoArgsConstructor
 public class CustomUserDetail implements OAuth2User,UserDetails {
 
     private Member member;

@@ -1,5 +1,4 @@
 package com.bs.hellooauth2jwt.controller;
-import com.bs.hellooauth2jwt.domain.Member;
 import com.bs.hellooauth2jwt.dto.UserInfoDto;
 import com.bs.hellooauth2jwt.oauth.CustomUserDetail;
 
