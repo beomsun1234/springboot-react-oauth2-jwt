@@ -14,7 +14,7 @@ const Home = () => {
         alert("클릭")
         axios({
             method: "GET",
-            url: "http://localhost:8080/api/v1/member",
+            url: "http://ec2-3-22-108-197.us-east-2.compute.amazonaws.com/api/v1/member",
             headers : {
                 "Auth" : token
             }
@@ -32,7 +32,7 @@ const Home = () => {
         alert("클릭")
         axios({
             method: "GET",
-            url: "http://localhost:8080/api/v2/member",
+            url: "http://ec2-3-22-108-197.us-east-2.compute.amazonaws.com:8080/api/v2/member",
             headers : {
                 "Auth" : token
             }
@@ -51,7 +51,7 @@ const Home = () => {
             Home
             </h2>
             <div>     
-                {token == null ? <a  href="http://localhost:8080/oauth2/authorization/google">구글로그인</a> : "loginsucess"} {token == null ? null : <button onClick={() => { f1();}}>연결 테스트</button>}
+                {token == null ? <a  href="http://ec2-3-22-108-197.us-east-2.compute.amazonaws.com:8080/oauth2/authorization/google">구글로그인</a> : "loginsucess"} {token == null ? null : <button onClick={() => { f1();}}>연결 테스트</button>}
             </div>
                 {token == null ? null : <button onClick={() => { f2();}}>내정보 보기</button>}
                 <MemberInfo MemberInfo = {member}></MemberInfo>
