@@ -4,16 +4,16 @@ import KakaoLogin from 'react-kakao-login';
 import {GoogleLogin} from "react-google-login";
 import FacebookLogin from 'react-facebook-login';
 
-const state = {
-    data : null
-}
-const config = {
-    headers: {
-        "Content-Type": "application/json; charset=utf-8"
-    },
-};
+
+
 const Login = () => {
     const onSuccess = (response) => {
+        const config = {
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                "type":"kakao"
+            },
+        };
         console.log(response);
         const data = JSON.stringify(response)
         console.log(data);
@@ -25,12 +25,58 @@ const Login = () => {
             console.log(response);
             console.log(response.data);
             sessionStorage.setItem("token", response.data)
-            window.location.href = '/'
         })
         .catch(function (error) {
             console.log(error);
         });
         
+    }
+    const onSuccess2 = (response) => {
+        const config = {
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                "type":"google"
+            },
+        };
+        console.log(response);
+        const data = JSON.stringify(response)
+        console.log(data);
+        axios.post('http://localhost:8080/auth/token',
+            data,
+            config
+        )
+            .then(function (response) {
+            console.log(response);
+            console.log(response.data);
+            sessionStorage.setItem("token", response.data)
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+        
+    }
+    const onSuccess3 = (response) => {
+        const config = {
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                "type":"facebook"
+            },
+        };
+        console.log(response);
+        const data = JSON.stringify(response)
+        console.log(data);
+        axios.post('http://localhost:8080/auth/token',
+            data,
+            config
+        )
+            .then(function (response) {
+            console.log(response);
+            console.log(response.data);
+            sessionStorage.setItem("token", response.data)
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
         
     }
 // 받아온 데이터 처리하기
@@ -39,7 +85,7 @@ const onFailure = (error) => {
     }   
     return (
         <div>
-            <div id="kakao">
+            <div id="kakao" className="kakao">
                 <KakaoLogin 
                 token="137e0846ccca1d617c49511778c8a04c"
                 buttonText="Kakao"
@@ -53,7 +99,7 @@ const onFailure = (error) => {
                 <GoogleLogin
                 clientId={"418062724925-9ou23s69favr33e0tq2f6uruoa89tkit.apps.googleusercontent.com"}
                 buttonText="Google"
-                onSuccess={onSuccess}
+                onSuccess={onSuccess2}
                 onFailure={onFailure}
                 cookiePolicy={"single_host_origin"}
                 />
@@ -63,7 +109,7 @@ const onFailure = (error) => {
                 appId="626075848384794"
                 autoLoad={true}
                 fields="name,email,picture"
-                callback={onSuccess}
+                callback={onSuccess3}
                 />
             </div>
         </div>

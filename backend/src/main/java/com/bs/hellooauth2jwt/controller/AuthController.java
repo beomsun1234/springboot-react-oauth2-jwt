@@ -2,10 +2,7 @@ package com.bs.hellooauth2jwt.controller;
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,8 +20,12 @@ public class AuthController {
     }
 
     @PostMapping("token")
-    public String  token(Map<String, Object> attributes){
-        log.info("attributes={}", attributes);
+    public String  token(@RequestBody Map<String, Object> attributes, HttpServletRequest request){
+        log.info(request.getHeader("type"));
+        log.info("attributes={}",
+                attributes.get("profile"));
+        Map<String, Object> data = (Map<String, Object>) attributes.get("profile");
+        log.info("attributes={}", data.get("email"));
         return "token";
     }
 }
