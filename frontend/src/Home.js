@@ -2,11 +2,10 @@ import React, {  useState } from 'react';
 import axios from 'axios';
 import MemberInfo from './components/MemberInfo';
 
-
 const Home = () => {
 
     const [member, setMember ] = useState([]);
-
+    
     const token = window.sessionStorage.getItem("token")
 
     function f1(){
@@ -44,6 +43,9 @@ const Home = () => {
             console.log(Error);
         })
     }
+
+    
+
     
     return (
         <div>
@@ -54,9 +56,9 @@ const Home = () => {
                 {token == null ? <a  href="http://ec2-3-22-108-197.us-east-2.compute.amazonaws.com:8080/oauth2/authorization/google">구글로그인</a> : "loginsucess"} {token == null ? null : <button onClick={() => { f1();}}>연결 테스트</button>}
             </div>
                 {token == null ? null : <button onClick={() => { f2();}}>내정보 보기</button>}
-                <MemberInfo MemberInfo = {member}></MemberInfo>
+                <MemberInfo MemberInfo = {member}></MemberInfo>                
             </div>
     );
-};
+}
 
 export default Home;
