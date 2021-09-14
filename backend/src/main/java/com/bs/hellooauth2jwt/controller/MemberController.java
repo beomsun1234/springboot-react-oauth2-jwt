@@ -24,6 +24,7 @@ public class MemberController {
         return "환영합니다";
     }
 
+
     //
     @GetMapping("/api/v2/member")
     public UserInfoDto getMemberInfo(@AuthenticationPrincipal OAuth2User oAuth2User){

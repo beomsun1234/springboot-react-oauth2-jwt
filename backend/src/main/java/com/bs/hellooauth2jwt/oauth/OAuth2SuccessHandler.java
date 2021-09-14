@@ -23,7 +23,7 @@ import java.util.Map;
 @Component
 public class OAuth2SuccessHandler implements AuthenticationSuccessHandler{
     private final JwtUtil jwtUtil;
-    private final String redirectUrl = "http://localhost:3000/auth";
+    private final String redirectUrl = "http://localhost:80/auth";
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
