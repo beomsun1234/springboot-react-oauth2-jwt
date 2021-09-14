@@ -9,29 +9,16 @@ const Home = () => {
     const token = window.sessionStorage.getItem("token")
 
     function f1(){
-    
-        alert("클릭")
-        axios({
-            method: "GET",
-            url: "http://ec2-3-22-108-197.us-east-2.compute.amazonaws.com/api/v1/member",
-            headers : {
-                "Auth" : token
-            }
-        }).then((response)=>{
-            console.log("1"+response);
-            const data = JSON.data(response)
-            console.log("2"+data)
-        }).catch(Error=>{
-            console.log(Error);
-        })
-    
+        alert("로그아웃")
+        sessionStorage.removeItem("token")
+        window.location.replace("/")
     }
     function f2(){
     
         alert("클릭")
         axios({
             method: "GET",
-            url: "http://ec2-3-22-108-197.us-east-2.compute.amazonaws.com:8080/api/v2/member",
+            url: "http://localhost:8080/api/v2/member",
             headers : {
                 "Auth" : token
             }
@@ -51,9 +38,16 @@ const Home = () => {
         <div>
             <h2>
             Home
+            {token == null ? null : <button onClick={() => { f1();}}>로그아웃</button>}
             </h2>
-            <div>     
-                {token == null ? <a  href="http://ec2-3-22-108-197.us-east-2.compute.amazonaws.com:8080/oauth2/authorization/google">구글로그인</a> : "loginsucess"} {token == null ? null : <button onClick={() => { f1();}}>연결 테스트</button>}
+            <div id="google"> 
+            {token == null ? <a  href="http://localhost:8080/oauth2/authorization/google">구글로그인</a> : null} 
+            </div>
+            <div id="naver">
+            {token == null ? <a  href="http://localhost:8080/oauth2/authorization/naver">네이버로그인</a> : null}
+            </div>
+            <div id="kakao">
+            {token == null ? <a  href="http://localhost:8080/oauth2/authorization/kakao">카카오로그인</a> : null}
             </div>
                 {token == null ? null : <button onClick={() => { f2();}}>내정보 보기</button>}
                 <MemberInfo MemberInfo = {member}></MemberInfo>                
