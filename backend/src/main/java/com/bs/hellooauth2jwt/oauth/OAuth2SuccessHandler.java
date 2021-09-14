@@ -9,32 +9,45 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
 @Component
 public class OAuth2SuccessHandler implements AuthenticationSuccessHandler{
     private final JwtUtil jwtUtil;
+    private final String redirectUrl = "http://localhost:3000/auth";
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
-        String email = (String) oAuth2User.getAttributes().get("email");
-        String name = (String) oAuth2User.getAttributes().get("name");
-        Token token = jwtUtil.generateToken(email, name);
-        log.info("{}", token.getAccessToken());
+        OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
+        OAuth2Attributes userInfo = getUserInfo(oAuth2User);
+        log.info("email={}",userInfo.getEmail());
+        log.info("name={}",userInfo.getName());
+        log.info("-----토큰발급--------------------");
+        Token token = jwtUtil.generateToken(userInfo.getEmail(), userInfo.getName());
+        log.info("token={}", token.getAccessToken());
         String ip = getRemoteIp(request);
-        log.info("사용자port={}",request.getServerPort());
         log.info("ip={}",ip);
-        response.addHeader("Authorization", "Bearer " +  token.getAccessToken());
-        String targetUrl = "/auth/success?token="+token.getAccessToken();
-        //response.sendRedirect(ip+":3000/auth?token="+token.getAccessToken());
-        response.sendRedirect( "http://localhost:3000/auth?token="+token.getAccessToken());
+        response.sendRedirect(redirectUrl+"?token="+token.getAccessToken());
+    }
+
+    private OAuth2Attributes getUserInfo(OAuth2User oAuth2User){
+        Map<String,Object> data = oAuth2User.getAttributes();
+        if(data.get("response") != null){
+            return OAuth2Attributes.of("naver","response",data);
+        }
+        if(data.get("kakao_account")!=null){
+            return OAuth2Attributes.of("kakao","id",data);
+        }
+        return OAuth2Attributes.of("google","google",data);
     }
 
     /**

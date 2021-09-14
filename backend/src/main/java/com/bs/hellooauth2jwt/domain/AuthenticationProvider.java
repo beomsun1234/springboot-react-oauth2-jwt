@@ -4,5 +4,5 @@ import lombok.Getter;
 
 @Getter
 public enum AuthenticationProvider {
-    LOCAL, GOOGLE;
+    LOCAL, GOOGLE, KAKAO, NAVER;
 }

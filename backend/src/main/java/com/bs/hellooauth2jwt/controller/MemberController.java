@@ -27,6 +27,7 @@ public class MemberController {
     //
     @GetMapping("/api/v2/member")
     public UserInfoDto getMemberInfo(@AuthenticationPrincipal OAuth2User oAuth2User){
+        log.info("-------/api/v2/member 요청---------------------");
         CustomUserDetail customUserDetail = (CustomUserDetail)oAuth2User;
         return UserInfoDto.builder().email(customUserDetail.getEmail()).name(customUserDetail.getName()).build();
     }

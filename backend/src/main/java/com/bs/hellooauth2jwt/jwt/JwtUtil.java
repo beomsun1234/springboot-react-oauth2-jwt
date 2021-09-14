@@ -1,12 +1,9 @@
 package com.bs.hellooauth2jwt.jwt;
-
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.PostConstruct;
 import java.util.Base64;
 import java.util.Date;

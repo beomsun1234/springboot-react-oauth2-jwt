@@ -5,10 +5,12 @@ import com.bs.hellooauth2jwt.domain.Member;
 import com.bs.hellooauth2jwt.domain.Role;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 
 import java.util.Map;
 
+@Slf4j
 @Getter
 public class OAuth2Attributes {
     private Map<String, Object> attributes;
@@ -32,6 +34,17 @@ public class OAuth2Attributes {
     public static OAuth2Attributes of(String registrationId,
                                      String userNameAttributeName,
                                      Map<String, Object> attributes) {
+        if("kakao".equals(registrationId)){
+            log.info("----카카오 로그인-------------------");
+            log.info("userNameAttributeName={}",userNameAttributeName);
+            return ofKakao(userNameAttributeName,attributes);
+        }
+        if("naver".equals(registrationId)){
+            log.info("-----네이버 로그인-----------------");
+            log.info("userNameAttributeName={}",userNameAttributeName);
+            return ofNaver(userNameAttributeName, attributes);
+        }
+        log.info("----구글 로그인-------------------");
         return ofGoogle(userNameAttributeName, attributes);
     }
 
@@ -40,11 +53,42 @@ public class OAuth2Attributes {
         return OAuth2Attributes.builder()
                 .name((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
+                .picture((String) attributes.get("picture"))
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .authenticationProvider(AuthenticationProvider.GOOGLE)
                 .build();
     }
+
+    private static OAuth2Attributes ofKakao(String userNameAttributeName, Map<String, Object> attributes) {
+        // kakao는 kakao_account에 유저정보가 있다. (email)
+        Map<String, Object> kakaoAccount = (Map<String, Object>)attributes.get("kakao_account");
+        // kakao_account안에 또 profile이라는 JSON객체가 있다. (nickname, profile_image)
+        Map<String, Object> kakaoProfile = (Map<String, Object>)kakaoAccount.get("profile");
+
+        return OAuth2Attributes.builder()
+                .name((String) kakaoProfile.get("nickname"))
+                .email((String) kakaoAccount.get("email"))
+                .picture((String) kakaoProfile.get("profile_image_url"))
+                .attributes(attributes)
+                .nameAttributeKey(userNameAttributeName)
+                .authenticationProvider(AuthenticationProvider.KAKAO)
+                .build();
+    }
+
+    private static OAuth2Attributes ofNaver(String userNameAttributeName, Map<String, Object> attributes) {
+        // JSON형태이기 떄문에 Map을 통해서 데이터를 가져온다.
+        Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+        return OAuth2Attributes.builder()
+                .name((String) response.get("name"))
+                .email((String) response.get("email"))
+                .picture((String) response.get("profile_image"))
+                .attributes(attributes)
+                .nameAttributeKey(userNameAttributeName)
+                .authenticationProvider(AuthenticationProvider.NAVER)
+                .build();
+    }
+
 
     /**
      * toEntity()
