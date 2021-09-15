@@ -1,6 +1,7 @@
 import React, {  useState } from 'react';
 import axios from 'axios';
 import MemberInfo from './components/MemberInfo';
+//import kakao from './img/kakao_login_medium_narrow'
 
 const Home = () => {
 
@@ -38,9 +39,10 @@ const Home = () => {
         <div>
             <h2>
             Home
+            <div class="g-signin2" data-width="300" data-height="200" data-longtitle="true">gd</div>
             {token == null ? null : <button onClick={() => { f1();}}>로그아웃</button>}
             </h2>
-            <div id="google"> 
+            <div id="google" class="g-signin2"> 
             {token == null ? <a  href="http://localhost:8080/oauth2/authorization/google">구글로그인</a> : null} 
             </div>
             <div id="naver">
