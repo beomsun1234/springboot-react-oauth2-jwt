@@ -1,6 +1,6 @@
 package com.bs.hellooauth2jwt.jwt;
-import com.bs.hellooauth2jwt.domain.Member;
-import com.bs.hellooauth2jwt.domain.MemberRepostitory;
+import com.bs.hellooauth2jwt.domain.member.Member;
+import com.bs.hellooauth2jwt.domain.member.MemberRepostitory;
 import com.bs.hellooauth2jwt.oauth.CustomUserDetail;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

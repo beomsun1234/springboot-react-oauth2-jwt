@@ -1,4 +1,4 @@
-package com.bs.hellooauth2jwt.domain;
+package com.bs.hellooauth2jwt.domain.member;
 
 import lombok.Builder;
 import lombok.Getter;

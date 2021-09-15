@@ -1,8 +1,8 @@
 package com.bs.hellooauth2jwt.oauth;
 
 
-import com.bs.hellooauth2jwt.domain.Member;
-import com.bs.hellooauth2jwt.domain.MemberRepostitory;
+import com.bs.hellooauth2jwt.domain.member.Member;
+import com.bs.hellooauth2jwt.domain.member.MemberRepostitory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;

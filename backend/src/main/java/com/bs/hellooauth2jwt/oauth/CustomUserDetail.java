@@ -1,6 +1,6 @@
 package com.bs.hellooauth2jwt.oauth;
 
-import com.bs.hellooauth2jwt.domain.Member;
+import com.bs.hellooauth2jwt.domain.member.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

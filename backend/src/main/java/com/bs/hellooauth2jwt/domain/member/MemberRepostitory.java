@@ -1,5 +1,6 @@
-package com.bs.hellooauth2jwt.domain;
+package com.bs.hellooauth2jwt.domain.member;
 
+import com.bs.hellooauth2jwt.domain.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

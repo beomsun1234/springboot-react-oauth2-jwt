@@ -1,12 +1,11 @@
 package com.bs.hellooauth2jwt.oauth;
 
-import com.bs.hellooauth2jwt.domain.AuthenticationProvider;
-import com.bs.hellooauth2jwt.domain.Member;
-import com.bs.hellooauth2jwt.domain.Role;
+import com.bs.hellooauth2jwt.domain.member.AuthenticationProvider;
+import com.bs.hellooauth2jwt.domain.member.Member;
+import com.bs.hellooauth2jwt.domain.member.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 
 import java.util.Map;
 

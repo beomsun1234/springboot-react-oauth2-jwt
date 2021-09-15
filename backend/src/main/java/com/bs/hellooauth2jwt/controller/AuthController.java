@@ -19,7 +19,8 @@ public class AuthController {
         return token;
     }
 
-    @PostMapping("token")
+
+    @PostMapping("android/token")
     public String  token(@RequestBody Map<String, Object> attributes, HttpServletRequest request){
         log.info(request.getHeader("type"));
         log.info("attributes={}",
