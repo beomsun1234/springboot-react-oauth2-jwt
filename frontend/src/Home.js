@@ -52,7 +52,7 @@ const Home = () => {
             {token == null ? <a  href="http://localhost:8080/oauth2/authorization/kakao">카카오로그인</a> : null}
             </div>
                 {token == null ? null : <button onClick={() => { f2();}}>내정보 보기</button>}
-                <MemberInfo MemberInfo = {member}></MemberInfo>                
+                <MemberInfo MemberInfo = {member}></MemberInfo>        
             </div>
     );
 }
