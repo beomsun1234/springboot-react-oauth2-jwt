@@ -11,7 +11,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOriginPatterns("*")
                 .allowedMethods("*")
-                .allowedOrigins("http://localhost:3000")
+                .allowedOrigins("*")
                 .allowedOrigins("*")
                 .allowedHeaders("*");
         // cors오린진(인증x)

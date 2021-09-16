@@ -1,6 +1,6 @@
 spring:
   profiles:
-    include: db, oauth2
+    include: db, oauth2,url
 
   jpa:
     properties:
