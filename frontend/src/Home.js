@@ -43,13 +43,13 @@ const Home = () => {
             {token == null ? null : <button onClick={() => { f1();}}>로그아웃</button>}
             </h2>
             <div id="google" class="g-signin2"> 
-            {token == null ? <a  href="http://localhost:8080/oauth2/authorization/google">구글로그인</a> : null} 
+            {token == null ? <a  href="http://ec2-3-22-108-197.us-east-2.compute.amazonaws.com:8080/oauth2/authorization/google">구글로그인</a> : null} 
             </div>
             <div id="naver">
-            {token == null ? <a  href="http://localhost:8080/oauth2/authorization/naver">네이버로그인</a> : null}
+            {token == null ? <a  href="http://ec2-3-22-108-197.us-east-2.compute.amazonaws.com:8080/oauth2/authorization/naver">네이버로그인</a> : null}
             </div>
             <div id="kakao">
-            {token == null ? <a  href="http://localhost:8080/oauth2/authorization/kakao">카카오로그인</a> : null}
+            {token == null ? <a  href="http://ec2-3-22-108-197.us-east-2.compute.amazonaws.com:8080/oauth2/authorization/kakao">카카오로그인</a> : null}
             </div>
                 {token == null ? null : <button onClick={() => { f2();}}>내정보 보기</button>}
                 <MemberInfo MemberInfo = {member}></MemberInfo>        
