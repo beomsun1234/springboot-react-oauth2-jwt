@@ -19,7 +19,7 @@ const Home = () => {
         alert("클릭")
         axios({
             method: "GET",
-            url: "http://localhost:8080/api/v2/member",
+            url: "http://ec2-3-22-108-197.us-east-2.compute.amazonaws.com:8080/api/v2/member",
             headers : {
                 "Auth" : token
             }
