@@ -7,7 +7,14 @@
 
 
 - ### ~~```Nginx 사용```~~
-- nginx로 모든 client 요청이 들어옴(80포트로 유저와 통신) - /api 요청시 8080포트로 요청해서 해당 값을 가지고옴
+
+
+
+![nginx](https://user-images.githubusercontent.com/68090443/133868869-7a9a9a8d-61ff-45a3-b9eb-2ce4be40c458.PNG)
+
+
+
+     - nginx로 모든 client 요청이 들어옴(80포트로 유저와 통신) - /api 요청시 8080포트로 요청해서 해당 값을 가지고옴 
 
 
 
