@@ -39,5 +39,29 @@
             
         
 
-- ### NEXT -> ```무중단 배포``` 
+## 결과
+
+![로그인화면](https://user-images.githubusercontent.com/68090443/135737724-c3e8163f-b317-42e1-9bf2-747a01d1b291.PNG)
+
+home 화면
+
+---
+
+
+![로그인성공](https://user-images.githubusercontent.com/68090443/135737748-1ac6a663-c0fc-4c7f-bc10-05e336fb0f5f.PNG)
+
+로그인 성공 화면
+
+![로그인성공2](https://user-images.githubusercontent.com/68090443/135737734-72aa558c-c4c4-49cc-a13d-51db06821c43.PNG)
+
+로그인 성공후 내정보 보기 버튼 클릭시 화며
+
+---
+
+
+![로그아웃시처음화면으로](https://user-images.githubusercontent.com/68090443/135737781-d785d59d-457a-4363-805a-b28eec6e28cf.PNG)
+
+로그아웃 버튼 클릭시 화면
+
+
 
